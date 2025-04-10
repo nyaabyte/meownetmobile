@@ -171,4 +171,10 @@ export default StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
   },
+  logoutButton: {
+    backgroundColor: '#D32F2F',
+    marginTop: 30,
+    width: '80%',
+    alignSelf: 'center',
+  },
 });

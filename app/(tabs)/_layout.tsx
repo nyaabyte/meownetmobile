@@ -28,14 +28,24 @@ export default function TabLayout() {
           justifyContent: 'center',
           height: '100%',
         },
-        headerShown: false,
+
+        headerShown: true,
+        headerStyle: {
+          backgroundColor: themeColors.background,
+
+          elevation: 0,
+          shadowOpacity: 0,
+          borderBottomWidth: 0,
+        },
+        headerTintColor: themeColors.text,
+        headerTitleStyle: { fontFamily: appFontFamily },
       }}
     >
-      {/* Feed Tab */}
       <Tabs.Screen
-        name="index" // app/(tabs)/index.tsx
+        name="index"
         options={{
-          title: 'Feed',
+          title: 'Home',
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'home-variant' : 'home-variant-outline'}
@@ -45,40 +55,35 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Search Tab */}
       <Tabs.Screen
-        name="search" // app/(tabs)/search.tsx
+        name="search"
         options={{
           title: 'Search',
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={'magnify'} color={color} />
           ),
         }}
       />
 
-      {/* --- ADD CREATE POST TAB --- */}
       <Tabs.Screen
-        name="Create" // app/(tabs)/create.tsx
+        name="Create"
         options={{
           title: 'Create',
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'plus-circle' : 'plus-circle-outline'}
               color={color}
-              size={28} // Slightly larger icon for center?
+              size={28}
             />
           ),
-          // Optional: Style the middle button differently if desired
-          // tabBarItemStyle: { ... }
         }}
       />
-      {/* --- END CREATE POST TAB --- */}
-
-      {/* --- ADD DMS TAB --- */}
       <Tabs.Screen
-        name="dms" // app/(tabs)/dms.tsx
+        name="dms"
         options={{
-          title: 'DMs',
+          title: 'Direct Messages',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'message-text' : 'message-text-outline'}
@@ -87,13 +92,12 @@ export default function TabLayout() {
           ),
         }}
       />
-      {/* --- END DMS TAB --- */}
 
-      {/* Profile Tab */}
       <Tabs.Screen
-        name="profile" // app/(tabs)/profile.tsx
+        name="profile"
         options={{
           title: 'Profile',
+          headerShown: false,
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
               name={focused ? 'account-heart' : 'account-heart-outline'}
