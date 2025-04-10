@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, TextInput } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../styles/SearchScreen.styles';
-import Colors from '../constants/Colors';
+import styles from '../../styles/SearchScreen.styles';
+import Colors from '../../constants/Colors';
 
 export default function SearchScreen() {
   const themeColors = Colors.dark;
@@ -13,7 +13,7 @@ export default function SearchScreen() {
         <Text style={styles.title}>Search MeowNet</Text>
         <TextInput
           style={styles.searchInput}
-          placeholder="Search for posts or users..."
+          placeholder="Search MeowNet..."
           placeholderTextColor={themeColors.subtleText}
         />
         <View style={styles.separator} />

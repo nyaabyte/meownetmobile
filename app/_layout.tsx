@@ -1,19 +1,18 @@
+// app/_layout.tsx
+
 import React, { useEffect } from 'react';
-import { Tabs } from 'expo-router';
+import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
 import { useFonts, Itim_400Regular } from '@expo-google-fonts/itim';
 import * as SplashScreen from 'expo-splash-screen';
 
 import Colors from '../constants/Colors';
-import { TabBarIcon } from '../components/TabBarIcon';
-import layoutStyles from '../styles/TabLayout.styles';
 
 SplashScreen.preventAutoHideAsync();
 
-export default function TabLayout() {
+export default function RootLayout() {
   const themeColors = Colors.dark;
-  const nyabyteColors = Colors.nyabyte;
+  const appFontFamily = 'Itim_400Regular';
 
   const [fontsLoaded, fontError] = useFonts({
     Itim_400Regular,
@@ -29,67 +28,32 @@ export default function TabLayout() {
     return null;
   }
 
-  const appFontFamily = 'Itim_400Regular';
-
   return (
     <>
       <StatusBar style="light" />
-      <Tabs
+
+      <Stack
         screenOptions={{
-          tabBarActiveTintColor: nyabyteColors.primary,
-          tabBarInactiveTintColor: themeColors.tabIconDefault,
-          headerShown: false,
-          tabBarStyle: layoutStyles.tabBar,
-          tabBarLabelStyle: [
-            layoutStyles.tabBarLabel,
-            { fontFamily: appFontFamily },
-          ],
-          tabBarItemStyle: {
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100%',
-          },
+          headerStyle: { backgroundColor: themeColors.tabBarBackground },
+          headerTintColor: themeColors.text,
+          headerTitleStyle: { fontFamily: appFontFamily },
         }}
       >
-        <Tabs.Screen
-          name="index"
+        <Stack.Screen
+          name="(tabs)"
           options={{
-            title: 'Feed',
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? 'home-variant' : 'home-variant-outline'}
-                color={color}
-              />
-            ),
+            headerShown: false,
           }}
         />
 
-        <Tabs.Screen
-          name="search"
+        <Stack.Screen
+          name="post/[id]"
           options={{
-            title: 'Search',
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? 'magnify' : 'magnify'}
-                color={color}
-              />
-            ),
+            headerShown: true,
+            headerBackTitle: 'Back',
           }}
         />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: 'Profile',
-            tabBarIcon: ({ color, focused }) => (
-              <TabBarIcon
-                name={focused ? 'account-heart' : 'account-heart-outline'}
-                color={color}
-              />
-            ),
-          }}
-        />
-      </Tabs>
+      </Stack>
     </>
   );
 }

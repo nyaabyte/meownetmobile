@@ -1,5 +1,3 @@
-// styles/TabLayout.styles.ts
-
 import { StyleSheet, Platform } from 'react-native';
 import Colors from '../constants/Colors';
 

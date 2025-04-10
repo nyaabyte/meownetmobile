@@ -9,31 +9,22 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: themeColors.background,
   },
-  container: {
-    flex: 1,
+  scrollContainer: {
+    flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingHorizontal: 25,
-    paddingTop: 40,
-    paddingBottom: 20,
+    paddingBottom: 100,
+  },
+
+  container: {
+    width: '100%',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingTop: 30,
   },
   logo: {
-    width: 350,
-    height: 350,
+    width: 300,
+    height: 150,
     resizeMode: 'contain',
-    marginBottom: -150,
-  },
-  separator: {
-    marginVertical: 25,
-    height: 1,
-    width: '80%',
-    backgroundColor: themeColors.separator,
-  },
-  body: {
-    fontSize: 18,
-    textAlign: 'center',
-    lineHeight: 26,
-    color: themeColors.subtleText,
-    fontFamily: appFontFamily,
+    marginBottom: 0,
   },
 });

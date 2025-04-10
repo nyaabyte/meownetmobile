@@ -1,5 +1,3 @@
-// components/TabBarIcon.tsx
-
 import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { type IconProps } from '@expo/vector-icons/build/createIconSet';
