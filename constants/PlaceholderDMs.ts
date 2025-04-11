@@ -12,6 +12,7 @@ export interface Conversation {
   timestamp: string;
   avatarUrl?: string;
 }
+
 export const DMS_CONVERSATIONS: Conversation[] = [
   {
     id: 'chat001',
@@ -33,6 +34,13 @@ export const DMS_CONVERSATIONS: Conversation[] = [
     lastMessage: ':3',
     timestamp: 'Mon',
     avatarUrl: 'https://zastix.club/pfp.png',
+  },
+  {
+    id: 'chat004',
+    otherUserName: 'geodebreaker',
+    lastMessage: 'goop',
+    timestamp: 'Tue',
+    avatarUrl: 'https://cdn.nyabyte.dev/gb.png',
   },
 ];
 
@@ -82,6 +90,26 @@ export const CHAT_MESSAGES: { [key: string]: Message[] } = {
     {
       id: 'm3-2',
       text: 'Example2',
+      sender: 'me',
+      timestamp: 'Mon',
+    },
+    {
+      id: 'm3-3',
+      text: ':3',
+      sender: 'other',
+      timestamp: 'Mon',
+    },
+  ],
+  chat004: [
+    {
+      id: 'm3-1',
+      text: 'Woah',
+      sender: 'other',
+      timestamp: 'Mon',
+    },
+    {
+      id: 'm3-2',
+      text: 'Woah',
       sender: 'me',
       timestamp: 'Mon',
     },

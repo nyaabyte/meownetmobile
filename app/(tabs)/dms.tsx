@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,17 +8,59 @@ import {
   SafeAreaView,
 } from 'react-native';
 import { Link, Stack } from 'expo-router';
-import {
-  DMS_CONVERSATIONS,
-  Conversation,
-} from '../../constants/PlaceholderDMs';
 import styles from '../../styles/DMsScreen.styles';
-import Colors from '../../constants/Colors';
+import { api } from '@/network/api';
+
+interface RawDMItem {
+  id: string;
+  other_user_name: string;
+  last_message: string;
+  timestamp: string;
+  avatar_url: string;
+}
+
+class DMListItem {
+  id: string;
+  otherUserName: string;
+  lastMessage: string;
+  timestamp: string;
+  avatarUrl: string;
+
+  constructor(data: RawDMItem) {
+    this.id = data.id;
+    this.otherUserName = data.other_user_name;
+    this.lastMessage = data.last_message;
+    this.timestamp = data.timestamp;
+    this.avatarUrl = data.avatar_url;
+  }
+}
+
+async function getDMs(): Promise<Array<DMListItem>> {
+  try {
+    const ret = await api('dmlist');
+    if (ret && ret.dmlist && Array.isArray(ret.dmlist)) {
+      return ret.dmlist.map((x: RawDMItem) => new DMListItem(x));
+    }
+    console.warn('API response format unexpected:', ret);
+    return [];
+  } catch (error) {
+    console.error('Failed to fetch DMs:', error);
+    return [];
+  }
+}
 
 export default function DMsScreen() {
-  const themeColors = Colors.dark;
+  const [dms, setDms] = useState<DMListItem[]>([]);
 
-  const renderItem = ({ item }: { item: Conversation }) => (
+  useEffect(() => {
+    const fetchDms = async () => {
+      const fetchedDms = await getDMs();
+      setDms(fetchedDms);
+    };
+    fetchDms();
+  }, []);
+
+  const renderItem = ({ item }: { item: DMListItem }) => (
     <Link href={`/chat/${item.id}`} asChild>
       <Pressable style={styles.itemContainer}>
         <Image source={{ uri: item.avatarUrl }} style={styles.avatar} />
@@ -38,7 +80,7 @@ export default function DMsScreen() {
       <Stack.Screen options={{ title: 'Direct Messages' }} />
       <View style={styles.container}>
         <FlatList
-          data={DMS_CONVERSATIONS}
+          data={dms}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
           ListEmptyComponent={
